@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeTree.DB", "NodeTree.DB\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeTree.INFRASTRUCTURE", "NodeTree.INFRASTRUCTURE\NodeTree.INFRASTRUCTURE.csproj", "{B93DA016-483D-4D80-9B7A-C8DF7A1D1F5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeNode.TESTS", "TreeNode.TESTS\TreeNode.TESTS.csproj", "{7B3085B4-F32D-423A-8FF7-7A4B817A4327}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B93DA016-483D-4D80-9B7A-C8DF7A1D1F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B93DA016-483D-4D80-9B7A-C8DF7A1D1F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B93DA016-483D-4D80-9B7A-C8DF7A1D1F5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B3085B4-F32D-423A-8FF7-7A4B817A4327}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B3085B4-F32D-423A-8FF7-7A4B817A4327}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B3085B4-F32D-423A-8FF7-7A4B817A4327}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B3085B4-F32D-423A-8FF7-7A4B817A4327}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
