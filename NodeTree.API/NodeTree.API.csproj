@@ -10,4 +10,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NodeTree.DB\NodeTree.DB.csproj" />
+  </ItemGroup>
+
 </Project>
