@@ -47,6 +47,7 @@ builder.Services.AddScoped<INodeService, NodeService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IRequestHandler<CreateNodeRequest, CreateNodeResponse>, CreateNodeHandler>();
 builder.Services.AddScoped<IRequestHandler<DeleteNodeRequest, DeleteNodeResponse>, DeleteNodeHandler>();
+builder.Services.AddScoped<IRequestHandler<RenameNodeRequest, RenameNodeResponse>, RenameNodeHandler>();
 var app = builder.Build();
 
 var scope = app.Services.CreateScope();
@@ -61,7 +62,7 @@ app.UseHttpsRedirection();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Restaurant API");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TreeNode API");
 });
 
 app.UseAuthorization();

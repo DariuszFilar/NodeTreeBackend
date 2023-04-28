@@ -6,6 +6,6 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Abstract
     {
         Task<List<Node>> GetAllSiblingsByParentIdAsync(long parentId);
         Task<Node> GetTreeByTreeNameAsync(string treeName);        
-        Task<Node> GetNodeWithChildrenByNodeId(long nodeId);
+        Task<Node> GetNodeWithChildrenByNodeIdAndTreeName(long nodeId, string treeName);
     }
 }
