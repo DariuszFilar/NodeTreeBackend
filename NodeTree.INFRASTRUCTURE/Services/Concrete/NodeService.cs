@@ -38,5 +38,16 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
 
             await _nodeRepository.AddAsync(node);
         }
+
+        public async Task DeleteNodeAsync(DeleteNodeRequest request)
+        {
+            Node node = await _nodeRepository.GetNodeWithChildrenByNodeId(request.NodeId);
+            if (node == null || node.Children.Any())
+            {
+                throw new SecureException();
+            }
+
+            await _nodeRepository.RemoveAsync(node);
+        }
     }
 }

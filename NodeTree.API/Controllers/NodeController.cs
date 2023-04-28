@@ -10,10 +10,13 @@ namespace NodeTree.API.Controllers
     public class NodeController : Controller
     {
         private readonly IRequestHandler<CreateNodeRequest, CreateNodeResponse> _createNodeHandler;
+        private readonly IRequestHandler<DeleteNodeRequest, DeleteNodeResponse> _deleteNodeHandler;
 
-        public NodeController(IRequestHandler<CreateNodeRequest, CreateNodeResponse> createNodeHandler)
+        public NodeController(IRequestHandler<CreateNodeRequest, CreateNodeResponse> createNodeHandler, 
+            IRequestHandler<DeleteNodeRequest, DeleteNodeResponse> deleteNodeHandler)
         {
             _createNodeHandler = createNodeHandler;
+            _deleteNodeHandler = deleteNodeHandler;
         }
 
         [HttpPost("add-node")]
@@ -22,6 +25,12 @@ namespace NodeTree.API.Controllers
             var response = await _createNodeHandler.Handle(request);
             return Ok(response);
         }
-       
+
+        [HttpPost("delete-node")]
+        public async Task<IActionResult> DeleteNode(DeleteNodeRequest request)
+        {
+            var response = await _deleteNodeHandler.Handle(request);
+            return Ok(response);
+        }
     }
 }
