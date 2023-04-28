@@ -1,6 +1,6 @@
 using NodeTree.DB;
-using NodeTree.DB.Repositories.Abstract;
-using NodeTree.DB.Repositories.Concrete;
+using NodeTree.INFRASTRUCTURE.Repositories.Abstract;
+using NodeTree.INFRASTRUCTURE.Repositories.Concrete;
 using NodeTree.INFRASTRUCTURE.Services.Abstract;
 using NodeTree.INFRASTRUCTURE.Services.Concrete;
 

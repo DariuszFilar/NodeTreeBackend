@@ -1,7 +1,8 @@
-﻿using NodeTree.DB.Entities;
-using NodeTree.DB.Repositories.Abstract;
+﻿using NodeTree.DB;
+using NodeTree.DB.Entities;
+using NodeTree.INFRASTRUCTURE.Repositories.Abstract;
 
-namespace NodeTree.DB.Repositories.Concrete
+namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
 {
     public class NodeRepository : Repository<Node>, INodeRepository
     {

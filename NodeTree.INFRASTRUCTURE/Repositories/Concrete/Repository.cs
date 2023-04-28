@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NodeTree.DB.Repositories.Abstract;
+using NodeTree.DB;
+using NodeTree.INFRASTRUCTURE.Repositories.Abstract;
 
-namespace NodeTree.DB.Repositories.Concrete
+namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
