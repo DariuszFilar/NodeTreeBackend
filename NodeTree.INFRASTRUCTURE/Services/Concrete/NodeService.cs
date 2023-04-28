@@ -1,4 +1,5 @@
 ﻿using NodeTree.DB.Entities;
+using NodeTree.INFRASTRUCTURE.Exceptions;
 using NodeTree.INFRASTRUCTURE.Repositories.Abstract;
 using NodeTree.INFRASTRUCTURE.Requests;
 using NodeTree.INFRASTRUCTURE.Services.Abstract;
@@ -13,13 +14,18 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
             _nodeRepository = nodeRepository;
         }
         public async Task AddNodeAsync(CreateNodeRequest request)
-        {            
+        {
             if (request.ParentId == null)
             {
-                throw new Exception();
+                throw new SecureException();
             }
 
-            var parentId = _nodeRepository.GetByIdAsync(request.ParentId.Value) ?? throw new Exception();
+            Node parent = await _nodeRepository.GetByIdAsync(request.ParentId.Value);
+
+            if (parent == null)
+            {
+                throw new SecureException();
+            }
 
             List<Node> siblings = await _nodeRepository.GetAllSiblingsByParentIdAsync(request.ParentId.Value);
             if (siblings.Any(s => s.Name == request.Name))

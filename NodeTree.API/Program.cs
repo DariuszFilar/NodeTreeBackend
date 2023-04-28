@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using NodeTree.API.Handlers.Commands;
 using NodeTree.DB;
+using NodeTree.INFRASTRUCTURE.Middleware;
 using NodeTree.INFRASTRUCTURE.Repositories.Abstract;
 using NodeTree.INFRASTRUCTURE.Repositories.Concrete;
 using NodeTree.INFRASTRUCTURE.Requests;
@@ -42,9 +43,10 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<NodeTreeDbContext>();
 builder.Services.AddScoped<INodeRepository, NodeRepository>();
 builder.Services.AddScoped<INodeService, NodeService>();
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IRequestHandler<CreateNodeRequest, CreateNodeResponse>, CreateNodeHandler>();
 var app = builder.Build();
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
