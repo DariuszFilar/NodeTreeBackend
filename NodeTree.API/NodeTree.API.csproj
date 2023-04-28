@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NodeTree.DB\NodeTree.DB.csproj" />
+    <ProjectReference Include="..\NodeTree.INFRASTRUCTURE\NodeTree.INFRASTRUCTURE.csproj" />
   </ItemGroup>
 
 </Project>
