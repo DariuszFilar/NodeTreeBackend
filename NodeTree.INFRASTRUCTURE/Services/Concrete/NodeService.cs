@@ -18,7 +18,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
         }
         public async Task CreateNodeAsync(CreateNodeRequest request)
         {
-            Node parent = await _nodeRepository.GetByIdAsync(request.ParentId);
+           Node parent = await _nodeRepository.GetByIdAsync(request.ParentId);
 
             if (parent == null)
             {
