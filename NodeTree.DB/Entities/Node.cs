@@ -5,6 +5,6 @@
         public long Id { get; set; }
         public string Name { get; set; }
         public long ParentId { get; set; }
-        public List<Node> Children { get; set; }
+        public virtual List<Node> Children { get; set; }
     }
 }
