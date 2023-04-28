@@ -25,7 +25,7 @@ namespace NodeTree.DB
                 {
                     Node masterNode = new()
                     {
-                        Id = 0,
+                        NodeId = 0,
                         Name = "root"
                     };
 

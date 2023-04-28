@@ -2,9 +2,10 @@
 {
     public class Node
     {
-        public long Id { get; set; }
+        public long NodeId { get; set; }
         public string Name { get; set; }
         public long? ParentId { get; set; }
-        public virtual List<Node> Children { get; set; }
+        public virtual Node Parent { get; set; }
+        public virtual ICollection<Node> Children { get; set; }
     }
 }
