@@ -44,10 +44,13 @@ builder.Services.AddDbContext<NodeTreeDbContext>();
 builder.Services.AddScoped<NodeTreeSeeder>();
 builder.Services.AddScoped<INodeRepository, NodeRepository>();
 builder.Services.AddScoped<INodeService, NodeService>();
+builder.Services.AddScoped<ITreeRepository, TreeRepository>();
+builder.Services.AddScoped<ITreeService, TreeService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IRequestHandler<CreateNodeRequest, CreateNodeResponse>, CreateNodeHandler>();
 builder.Services.AddScoped<IRequestHandler<DeleteNodeRequest, DeleteNodeResponse>, DeleteNodeHandler>();
 builder.Services.AddScoped<IRequestHandler<RenameNodeRequest, RenameNodeResponse>, RenameNodeHandler>();
+builder.Services.AddScoped<IRequestHandler<GetTreeRequest, GetTreeResponse>, GetTreeHandler>();
 var app = builder.Build();
 
 var scope = app.Services.CreateScope();

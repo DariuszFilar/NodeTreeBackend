@@ -9,9 +9,12 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
     public class NodeService : INodeService
     {
         private readonly INodeRepository _nodeRepository;
-        public NodeService(INodeRepository nodeRepository)
+        private readonly ITreeRepository _treeRepository;
+        public NodeService(INodeRepository nodeRepository, 
+            ITreeRepository treeRepository)
         {
             _nodeRepository = nodeRepository;
+            _treeRepository = treeRepository;
         }
         public async Task CreateNodeAsync(CreateNodeRequest request)
         {
@@ -22,7 +25,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
                 throw new SecureException();
             }
 
-            Node Tree = await _nodeRepository.GetTreeByTreeNameAsync(request.TreeName);
+            Node Tree = await _treeRepository.GetTreeByTreeNameAsync(request.TreeName);
             List<Node> NodeSiblings = await _nodeRepository.GetAllSiblingsByParentIdAsync(request.ParentId);
             if (NodeSiblings.Any(n => n.Name == request.NodeName))
             {

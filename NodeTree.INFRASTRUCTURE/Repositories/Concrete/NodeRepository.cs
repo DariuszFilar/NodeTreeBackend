@@ -18,40 +18,13 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
             return await _context.Nodes
                 .Where(n => n.ParentId == parentId)
                 .ToListAsync();
-        }
-
-        public async Task<Node> GetTreeByTreeNameAsync(string treeName)
-        {
-            Node parent = await _context.Nodes
-                .Include(n => n.Children)
-                .Where(n => n.TreeName == treeName && n.ParentId == null)
-                .FirstOrDefaultAsync();
-
-            if (parent != null)
-            {
-                LoadChildrenRecursively(parent);
-            }
-
-            return parent;
-        }
+        }        
 
         public async Task<Node> GetNodeWithChildrenByNodeIdAndTreeName(long nodeId, string treeName)
         {
             return await _context.Nodes
                 .Include(n => n.Children)
                 .FirstOrDefaultAsync(n => n.NodeId == nodeId && n.TreeName == treeName);
-        }
-
-        private void LoadChildrenRecursively(Node node)
-        {
-            if (node == null) return;
-
-            foreach (var child in node.Children)
-            {
-                _context.Entry(child).Reference(n => n.Parent).Load();
-                _context.Entry(child).Collection(n => n.Children).Load();
-                LoadChildrenRecursively(child);
-            }
-        }
+        }                
     }
 }
