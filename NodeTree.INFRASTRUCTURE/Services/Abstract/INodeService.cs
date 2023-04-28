@@ -1,6 +1,9 @@
-﻿namespace NodeTree.INFRASTRUCTURE.Services.Abstract
+﻿using NodeTree.INFRASTRUCTURE.Requests;
+
+namespace NodeTree.INFRASTRUCTURE.Services.Abstract
 {
-    public class INodeService
+    public interface INodeService
     {
+        Task AddNodeAsync(CreateNodeRequest request);
     }
 }
