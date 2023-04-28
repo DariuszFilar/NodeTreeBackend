@@ -13,7 +13,7 @@ namespace NodeTree.API.Handlers.Commands
         }
         public async Task<CreateNodeResponse> Handle(CreateNodeRequest request)
         {
-            await _nodeService.AddNodeAsync(request);
+            await _nodeService.CreateNodeAsync(request);
 
             return new CreateNodeResponse();
         }
