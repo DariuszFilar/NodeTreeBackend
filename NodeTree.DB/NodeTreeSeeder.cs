@@ -24,9 +24,9 @@ namespace NodeTree.DB
                 if (!_context.Nodes.Any())
                 {
                     Node masterNode = new()
-                    {
-                        NodeId = 0,
-                        Name = "root"
+                    {                        
+                        Name = "ExampleNode",
+                        TreeName = "ExampleTree"                        
                     };
 
                     _context.Nodes.Add(masterNode);

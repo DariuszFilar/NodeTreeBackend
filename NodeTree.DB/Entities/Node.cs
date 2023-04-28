@@ -7,5 +7,6 @@
         public long? ParentId { get; set; }
         public virtual Node Parent { get; set; }
         public virtual ICollection<Node> Children { get; set; }
+        public string TreeName { get; set; }
     }
 }

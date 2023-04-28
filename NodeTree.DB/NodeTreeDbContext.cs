@@ -15,6 +15,10 @@ namespace NodeTree.DB
             modelBuilder.Entity<Node>()
                 .Property(n => n.Name)
                 .IsRequired();
+
+            modelBuilder.Entity<Node>()
+                .Property(n => n.TreeName)
+                .IsRequired();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
