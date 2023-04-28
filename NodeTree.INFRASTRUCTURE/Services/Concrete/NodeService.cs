@@ -13,7 +13,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
         {
             _nodeRepository = nodeRepository;
         }
-        public async Task AddNodeAsync(CreateNodeRequest request)
+        public async Task CreateNodeAsync(CreateNodeRequest request)
         {
             Node parent = await _nodeRepository.GetByIdAsync(request.ParentId);
 
@@ -23,8 +23,8 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
             }
 
             Node Tree = await _nodeRepository.GetTreeByTreeNameAsync(request.TreeName);
-            List<Node> siblings = await _nodeRepository.GetAllSiblingsByParentIdAsync(request.ParentId);
-            if (siblings.Any(s => s.Name == request.NodeName))
+            List<Node> NodeSiblings = await _nodeRepository.GetAllSiblingsByParentIdAsync(request.ParentId);
+            if (NodeSiblings.Any(n => n.Name == request.NodeName))
             {
                 throw new Exception();
             }
