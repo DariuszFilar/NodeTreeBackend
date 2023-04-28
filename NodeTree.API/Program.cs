@@ -1,8 +1,14 @@
+using NodeTree.DB;
+using NodeTree.DB.Repositories.Abstract;
+using NodeTree.DB.Repositories.Concrete;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<NodeTreeDbContext>();
+builder.Services.AddScoped<INodeRepository, NodeRepository>();
 
 var app = builder.Build();
 
