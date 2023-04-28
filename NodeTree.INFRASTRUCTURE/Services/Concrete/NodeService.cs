@@ -25,7 +25,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
 
             Node node = new()
             {
-                Name = request.Name                
+                Name = request.Name
             };
 
             if (request.ParentId != null)
