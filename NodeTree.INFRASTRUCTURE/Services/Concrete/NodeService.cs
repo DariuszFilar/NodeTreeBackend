@@ -16,15 +16,14 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
         public async Task CreateNodeAsync(CreateNodeRequest request)
         {
             Node parent = await _nodeRepository.GetByIdAsync(request.ParentId);
-
-            if (parent == null)
+            Node tree = await _nodeRepository.GetTreeByTreeNameAsync(request.TreeName);
+            if (parent == null || tree == null)
             {
                 throw new SecureException();
             }
 
-            Node Tree = await _nodeRepository.GetTreeByTreeNameAsync(request.TreeName);
-            List<Node> NodeSiblings = await _nodeRepository.GetAllSiblingsByParentIdAsync(request.ParentId);
-            if (NodeSiblings.Any(n => n.Name == request.NodeName))
+            List<Node> nodeSiblings = await _nodeRepository.GetAllSiblingsByParentIdAsync(request.ParentId);
+            if (nodeSiblings.Any(n => n.Name == request.NodeName))
             {
                 throw new Exception();
             }
