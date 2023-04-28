@@ -13,25 +13,25 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
             _nodeRepository = nodeRepository;
         }
         public async Task AddNodeAsync(CreateNodeRequest request)
-        {
-            if (request.ParentId != null)
+        {            
+            if (request.ParentId == null)
             {
-                List<Node> siblings = await _nodeRepository.GetAllSiblingsByParentIdAsync(request.ParentId.Value);
-                if (siblings.Any(s => s.Name == request.Name))
-                {
-                    throw new Exception();
-                }
+                throw new Exception();
+            }
+
+            var parentId = _nodeRepository.GetByIdAsync(request.ParentId.Value) ?? throw new Exception();
+
+            List<Node> siblings = await _nodeRepository.GetAllSiblingsByParentIdAsync(request.ParentId.Value);
+            if (siblings.Any(s => s.Name == request.Name))
+            {
+                throw new Exception();
             }
 
             Node node = new()
             {
-                Name = request.Name
+                Name = request.Name,
+                ParentId = request.ParentId.Value
             };
-
-            if (request.ParentId != null)
-            {
-                node.ParentId = request.ParentId.Value;
-            }
 
             await _nodeRepository.AddAsync(node);
         }

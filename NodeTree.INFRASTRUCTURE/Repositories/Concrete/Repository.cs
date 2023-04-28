@@ -13,7 +13,7 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
             _dbContext = dbContext;
         }
 
-        public async Task<TEntity> GetByIdAsync(int id)
+        public async Task<TEntity> GetByIdAsync(long id)
         {
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
