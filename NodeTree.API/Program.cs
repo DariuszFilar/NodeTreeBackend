@@ -46,6 +46,7 @@ builder.Services.AddScoped<INodeRepository, NodeRepository>();
 builder.Services.AddScoped<INodeService, NodeService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IRequestHandler<CreateNodeRequest, CreateNodeResponse>, CreateNodeHandler>();
+builder.Services.AddScoped<IRequestHandler<DeleteNodeRequest, DeleteNodeResponse>, DeleteNodeHandler>();
 var app = builder.Build();
 
 var scope = app.Services.CreateScope();
