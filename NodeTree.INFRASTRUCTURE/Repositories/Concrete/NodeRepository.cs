@@ -35,11 +35,11 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
             return parent;
         }
 
-        public async Task<Node> GetNodeWithChildrenByNodeId(long nodeId)
+        public async Task<Node> GetNodeWithChildrenByNodeIdAndTreeName(long nodeId, string treeName)
         {
             return await _context.Nodes
                 .Include(n => n.Children)
-                .FirstOrDefaultAsync(n => n.NodeId == nodeId);
+                .FirstOrDefaultAsync(n => n.NodeId == nodeId && n.TreeName == treeName);
         }
 
         private void LoadChildrenRecursively(Node node)

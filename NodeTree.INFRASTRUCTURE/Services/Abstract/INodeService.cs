@@ -6,5 +6,6 @@ namespace NodeTree.INFRASTRUCTURE.Services.Abstract
     {
         Task AddNodeAsync(CreateNodeRequest request);
         Task DeleteNodeAsync(DeleteNodeRequest request);
+        Task RenameNodeAsync(RenameNodeRequest request);
     }
 }
