@@ -7,6 +7,9 @@ namespace NodeTree.INFRASTRUCTURE.Middleware
 {
     public class ErrorHandlingMiddleware : IMiddleware
     {
+        /// <summary>
+        /// Middleware for handling exceptions that occur during request processing.
+        /// </summary>
         private readonly IExceptionLogService _exceptionLogService;
         public ErrorHandlingMiddleware(IExceptionLogService exceptionLogService)
         {

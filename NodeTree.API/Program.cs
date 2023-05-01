@@ -3,6 +3,7 @@ using NodeTree.API.Handlers;
 using NodeTree.API.Handlers.Commands;
 using NodeTree.API.Handlers.Queries;
 using NodeTree.DB;
+using NodeTree.INFRASTRUCTURE;
 using NodeTree.INFRASTRUCTURE.Middleware;
 using NodeTree.INFRASTRUCTURE.Repositories.Abstract;
 using NodeTree.INFRASTRUCTURE.Repositories.Concrete;
@@ -16,6 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSwaggerGen(c =>
 {
+    c.ParameterFilter<DefaultValueParameterFilter>();
+    c.EnableAnnotations();
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {

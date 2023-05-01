@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NodeTree.API.Handlers;
 using NodeTree.INFRASTRUCTURE.Requests;
 using NodeTree.INFRASTRUCTURE.Responses;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace NodeTree.API.Controllers
 {
@@ -15,7 +16,12 @@ namespace NodeTree.API.Controllers
         {
             _getTreeHandler = getTreeHandler;
         }
+
         [HttpPost("get")]
+        [SwaggerOperation(
+            Summary = "Returns entire tree.",
+            Description = "Returns entire tree. If tree doesn't exist it will be created automatically."
+            )]
         public async Task<IActionResult> GetTree(GetTreeRequest request) 
         {
             var response = await _getTreeHandler.Handle(request);
