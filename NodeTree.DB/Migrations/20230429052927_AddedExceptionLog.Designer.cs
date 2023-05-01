@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NodeTree.DB;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -12,9 +13,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NodeTree.DB.Migrations
 {
     [DbContext(typeof(NodeTreeDbContext))]
-    partial class NodeTreeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230429052927_AddedExceptionLog")]
+    partial class AddedExceptionLog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,17 +36,14 @@ namespace NodeTree.DB.Migrations
                     b.Property<Dictionary<string, string>>("BodyParameters")
                         .HasColumnType("hstore");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("text");
-
                     b.Property<Dictionary<string, string>>("QueryParameters")
                         .HasColumnType("hstore");
 
                     b.Property<string>("StackTrace")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Type")
                         .HasColumnType("text");

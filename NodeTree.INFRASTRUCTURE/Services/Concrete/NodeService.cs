@@ -10,7 +10,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
     {
         private readonly INodeRepository _nodeRepository;
         private readonly ITreeRepository _treeRepository;
-        public NodeService(INodeRepository nodeRepository, 
+        public NodeService(INodeRepository nodeRepository,
             ITreeRepository treeRepository)
         {
             _nodeRepository = nodeRepository;
@@ -18,18 +18,17 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
         }
         public async Task CreateNodeAsync(CreateNodeRequest request)
         {
-           Node parent = await _nodeRepository.GetByIdAsync(request.ParentId);
-
-            if (parent == null)
+            Node parent = await _nodeRepository.GetByIdAsync(request.ParentId);
+            Node tree = await _treeRepository.GetTreeByTreeNameAsync(request.TreeName);
+            if (parent == null || tree == null)
             {
-                throw new SecureException();
+                throw new SecureException("TreeName or parent id is invalid.");
             }
-
-            Node Tree = await _treeRepository.GetTreeByTreeNameAsync(request.TreeName);
+            
             List<Node> NodeSiblings = await _nodeRepository.GetAllSiblingsByParentIdAsync(request.ParentId);
             if (NodeSiblings.Any(n => n.Name == request.NodeName))
             {
-                throw new Exception();
+                throw new SecureException("Name is not unique.");
             }
 
             Node node = new()
@@ -47,7 +46,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
             Node node = await _nodeRepository.GetNodeWithChildrenByNodeIdAndTreeName(request.NodeId, request.TreeName);
             if (node == null || node.Children.Any())
             {
-                throw new SecureException();
+                throw new SecureException("You must first delete children or node is null.");
             }
 
             await _nodeRepository.RemoveAsync(node);
@@ -58,7 +57,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
             Node node = await _nodeRepository.GetByIdAsync(request.NodeId);
             if (node == null)
             {
-                throw new SecureException();
+                throw new SecureException("Node not found.");
             }
 
             node.Name = request.NewNodeName;

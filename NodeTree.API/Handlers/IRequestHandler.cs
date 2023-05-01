@@ -1,4 +1,4 @@
-﻿namespace NodeTree.API.Handlers.Commands
+﻿namespace NodeTree.API.Handlers
 {
     public interface IRequestHandler<in TRequest, TResponse>
     {
