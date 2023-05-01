@@ -9,6 +9,7 @@ namespace NodeTree.DB
            "Server=localhost;Port=5432;Database=NodeTreeDb;User Id=postgres;Password=Postgress;";
 
         public DbSet<Node> Nodes { get; set; }
+        public DbSet<ExceptionLog> ExceptionsLog { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
