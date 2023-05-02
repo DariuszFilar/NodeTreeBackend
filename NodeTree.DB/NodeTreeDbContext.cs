@@ -3,7 +3,7 @@ using NodeTree.DB.Entities;
 
 namespace NodeTree.DB
 {
-    public class NodeTreeDbContext : DbContext
+    public class NodeTreeDbContext : DbContext, INodeTreeDbContext
     {
         private string _connectionString =
            "Server=localhost;Port=5432;Database=NodeTreeDb;User Id=postgres;Password=Postgress;";
