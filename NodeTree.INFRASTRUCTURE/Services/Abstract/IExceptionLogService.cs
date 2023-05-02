@@ -34,7 +34,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Abstract
         /// <param name="bodyParameters">The body parameters of the request that caused the exception.</param>
         /// <returns>The created exception log.</returns>
         Task<ExceptionLog> CreateExceptionLogAsync<T>(T exception,
-            Dictionary<string, string> queryParameters,
-            Dictionary<string, string> bodyParameters) where T : Exception;
+            List<QueryParameter> queryParameters,
+            List<BodyParameter> bodyParameters) where T : Exception;
     }
 }

@@ -15,7 +15,7 @@ namespace NodeTree.INFRASTRUCTURE.Responses
         /// <summary>
         /// The ID of the exception.
         /// </summary>
-        public string Id { get; set; }
+        public string ExceptionLogId { get; set; }
 
         /// <summary>
         /// Additional data associated with the exception.
@@ -25,7 +25,7 @@ namespace NodeTree.INFRASTRUCTURE.Responses
         public ExceptionMiddlewareResponse(ExceptionLog exceptionLog)
         {
             Type = exceptionLog.Type;
-            Id = exceptionLog.Id.ToString();
+            ExceptionLogId = exceptionLog.ExceptionLogId.ToString();
             Data = new Dictionary<string, string>
             {
                 { "message", exceptionLog.Message }

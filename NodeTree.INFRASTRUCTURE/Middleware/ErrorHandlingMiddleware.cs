@@ -2,6 +2,7 @@
 using NodeTree.INFRASTRUCTURE.Services.Abstract;
 using NodeTree.INFRASTRUCTURE.Responses;
 using System.Text.Json;
+using NodeTree.DB.Entities;
 
 namespace NodeTree.INFRASTRUCTURE.Middleware
 {
@@ -26,21 +27,34 @@ namespace NodeTree.INFRASTRUCTURE.Middleware
             {
                 context.Request.Body.Seek(0, SeekOrigin.Begin);
 
-                var jsonDocument = await JsonDocument.ParseAsync(context.Request.Body);
-                var requestBody = jsonDocument.RootElement
-                    .EnumerateObject()
-                    .ToDictionary(x => x.Name, x => x.Value.ToString());
+                var requestBody = await JsonDocument.ParseAsync(context.Request.Body)
+                    .ContinueWith(doc => doc.Result.RootElement.EnumerateObject())
+                    .ContinueWith(objs => objs.Result.Select(item =>
+                        new BodyParameter
+                        {
+                            Key = item.Name,
+                            Value = item.Value.ToString()
+                        }
+                    ).ToList());
 
-                var queryParameters = context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString());
+                var queryParameters = context.Request.Query.Select(item =>
+                    new QueryParameter
+                    {
+                        Key = item.Key,
+                        Value = item.Value
+                    }
+                ).ToList();
 
                 var exceptionLog = await _exceptionLogService.CreateExceptionLogAsync(secureException,
                     queryParameters,
                     requestBody);
+
                 context.Response.StatusCode = 500;
 
                 var response = new ExceptionMiddlewareResponse(exceptionLog);
+
                 await context.Response.WriteAsJsonAsync(response);
-            }          
+            }
         }
     }
 }

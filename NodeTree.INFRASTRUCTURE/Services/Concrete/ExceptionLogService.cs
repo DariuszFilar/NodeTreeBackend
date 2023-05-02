@@ -33,8 +33,8 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
         }
 
         public async Task<ExceptionLog> CreateExceptionLogAsync<T>(T exception,
-            Dictionary<string, string> queryParameters,
-            Dictionary<string, string> bodyParameters) where T : Exception
+            List<QueryParameter> queryParameters,
+            List<BodyParameter> bodyParameters) where T : Exception
         {
             var exceptionLog = new ExceptionLog
             {
