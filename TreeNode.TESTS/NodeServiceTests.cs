@@ -142,7 +142,7 @@ namespace NodeTree.TESTS
                 Children = new List<Node>(), 
                 TreeName = "Test Tree Name" };
 
-            _nodeRepositoryMock.Setup(x => x.GetNodeWithChildrenByNodeIdAndTreeName(node.NodeId, node.TreeName))
+            _nodeRepositoryMock.Setup(x => x.GetByIdAsync(node.NodeId))
                 .ReturnsAsync(node);
 
             // Act
