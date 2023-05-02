@@ -18,13 +18,6 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
             return await _context.Nodes
                 .Where(n => n.ParentId == parentId)
                 .ToListAsync();
-        }        
-
-        public async Task<Node> GetNodeWithChildrenByNodeIdAndTreeName(long nodeId, string treeName)
-        {
-            return await _context.Nodes
-                .Include(n => n.Children)
-                .FirstOrDefaultAsync(n => n.NodeId == nodeId && n.TreeName == treeName);
-        }                
+        }            
     }
 }

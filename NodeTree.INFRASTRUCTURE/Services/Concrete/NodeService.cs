@@ -47,7 +47,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
 
         public async Task DeleteNodeAsync(DeleteNodeRequest request)
         {
-            Node node = await _nodeRepository.GetNodeWithChildrenByNodeIdAndTreeName(request.NodeId, request.TreeName);
+            Node node = await _nodeRepository.GetByIdAsync(request.NodeId);
             if (node == null)
             {
                 throw new SecureException($"Node with ID = {request.NodeId} was not found");
