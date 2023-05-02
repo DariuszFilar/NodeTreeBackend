@@ -54,6 +54,7 @@ builder.Services.AddScoped<ITreeService, TreeService>();
 builder.Services.AddScoped<IExceptionLogRepository, ExceptionLogRepository>();
 builder.Services.AddScoped<IExceptionLogService, ExceptionLogService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
+builder.Services.AddScoped<INodeTreeDbContext, NodeTreeDbContext>();
 builder.Services.AddScoped<IRequestHandler<CreateNodeRequest, CreateNodeResponse>, CreateNodeHandler>();
 builder.Services.AddScoped<IRequestHandler<DeleteNodeRequest, DeleteNodeResponse>, DeleteNodeHandler>();
 builder.Services.AddScoped<IRequestHandler<RenameNodeRequest, RenameNodeResponse>, RenameNodeHandler>();

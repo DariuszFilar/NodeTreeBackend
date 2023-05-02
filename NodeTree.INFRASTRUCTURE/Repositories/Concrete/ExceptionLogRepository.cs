@@ -10,8 +10,8 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
     public class ExceptionLogRepository : Repository<ExceptionLog>, IExceptionLogRepository
     {
 
-        private readonly NodeTreeDbContext _context;
-        public ExceptionLogRepository(NodeTreeDbContext context) : base(context)
+        private readonly INodeTreeDbContext _context;
+        public ExceptionLogRepository(INodeTreeDbContext context) : base(context)
         {
             _context = context;
         }

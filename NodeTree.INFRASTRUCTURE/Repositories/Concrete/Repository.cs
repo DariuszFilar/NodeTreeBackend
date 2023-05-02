@@ -6,9 +6,9 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly NodeTreeDbContext _dbContext;
+        private readonly INodeTreeDbContext _dbContext;
 
-        public Repository(NodeTreeDbContext dbContext)
+        public Repository(INodeTreeDbContext dbContext)
         {
             _dbContext = dbContext;
         }

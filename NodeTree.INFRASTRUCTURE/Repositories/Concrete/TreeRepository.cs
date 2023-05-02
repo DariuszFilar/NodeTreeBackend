@@ -7,8 +7,8 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
 {
     public class TreeRepository : Repository<Node>, ITreeRepository
     {
-        private readonly NodeTreeDbContext _context;
-        public TreeRepository(NodeTreeDbContext context) : base(context)
+        private readonly INodeTreeDbContext _context;
+        public TreeRepository(INodeTreeDbContext context) : base(context)
         {
             _context = context;
         }
