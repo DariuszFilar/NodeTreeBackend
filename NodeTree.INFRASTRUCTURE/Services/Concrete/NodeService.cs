@@ -18,17 +18,21 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
         }
         public async Task CreateNodeAsync(CreateNodeRequest request)
         {
-            Node parent = await _nodeRepository.GetByIdAsync(request.ParentId);
             Node tree = await _treeRepository.GetTreeByTreeNameAsync(request.TreeName);
-            if (parent == null || tree == null)
+            Node parent = await _nodeRepository.GetByIdAsync(request.ParentId);                      
+            if (tree == null)
             {
-                throw new SecureException("TreeName or parent id is invalid.");
+                throw new SecureException($"Node with ID = {request.ParentId} was not found");
             }
-            
+            if (parent == null)
+            {
+                throw new SecureException("Requested node was found, but it doesn't belong your tree.");
+            }
+
             List<Node> NodeSiblings = await _nodeRepository.GetAllSiblingsByParentIdAsync(request.ParentId);
             if (NodeSiblings.Any(n => n.Name == request.NodeName))
             {
-                throw new SecureException("Name is not unique.");
+                throw new SecureException("Duplicate name.");
             }
 
             Node node = new()
@@ -44,9 +48,17 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
         public async Task DeleteNodeAsync(DeleteNodeRequest request)
         {
             Node node = await _nodeRepository.GetNodeWithChildrenByNodeIdAndTreeName(request.NodeId, request.TreeName);
-            if (node == null || node.Children.Any())
+            if (node == null)
             {
-                throw new SecureException("You must first delete children or node is null.");
+                throw new SecureException($"Node with ID = {request.NodeId} was not found");
+            }
+            if (node.TreeName != request.TreeName)
+            {
+                throw new SecureException("Requested node was found, but it doesn't belong your tree");
+            }
+            if (node.Children.Any())
+            {
+                throw new SecureException("You have to delete all children nodes first.");
             }
 
             await _nodeRepository.RemoveAsync(node);
@@ -58,6 +70,10 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
             if (node == null)
             {
                 throw new SecureException("Node not found.");
+            }
+            if (node.TreeName != request.TreeName)
+            {
+                throw new SecureException("Requested node was found, but it doesn't belong your tree");
             }
 
             node.Name = request.NewNodeName;
