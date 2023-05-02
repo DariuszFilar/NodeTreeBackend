@@ -10,7 +10,7 @@ namespace NodeTree.INFRASTRUCTURE.Responses
         /// <summary>
         /// Gets or sets the ID of the exception log.
         /// </summary>
-        public long Id { get; set; }
+        public long ExceptionLogId { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the exception.
@@ -29,7 +29,7 @@ namespace NodeTree.INFRASTRUCTURE.Responses
         public GetSingleExceptionLogResponse(ExceptionLog exceptionLog)
         {
             Type = exceptionLog.Type;
-            Id = exceptionLog.Id;
+            ExceptionLogId = exceptionLog.ExceptionLogId;
             Data = new Dictionary<string, string>
             {
                 { "text", exceptionLog.StackTrace }

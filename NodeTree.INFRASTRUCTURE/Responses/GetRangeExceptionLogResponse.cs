@@ -30,7 +30,7 @@ namespace NodeTree.INFRASTRUCTURE.Responses
             Items = exceptionLogs.Select(el => new ExcetpionLogResponseDto()
             {
                 CreatedAt = el.CreatedAt,
-                Id = el.Id
+                Id = el.ExceptionLogId
             }).ToList();
         }
     }    

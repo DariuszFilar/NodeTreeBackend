@@ -8,6 +8,8 @@ namespace NodeTree.DB
     {
         DbSet<Node> Nodes { get; set; }
         DbSet<ExceptionLog> ExceptionsLog { get; set; }
+        DbSet<BodyParameter> BodyParameters { get; set; }
+        DbSet<QueryParameter> QueryParameters { get; set; }
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
