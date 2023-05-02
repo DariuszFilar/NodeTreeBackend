@@ -23,7 +23,7 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
             int take)
         {
             var query = _context.ExceptionsLog
-            .Where(el => search == null || el.Type.ToLower() == search)
+            .Where(el => search == null || el.Type.ToLower() == search.ToLower())
             .Where(el => !from.HasValue || el.CreatedAt >= from.Value)
             .Where(el => !to.HasValue || el.CreatedAt <= to.Value);
 
