@@ -5,6 +5,13 @@ namespace NodeTree.DB
 {
     public class NodeTreeDbContext : DbContext, INodeTreeDbContext
     {
+        private readonly DbContextOptions<NodeTreeDbContext> _options;
+        public NodeTreeDbContext(DbContextOptions<NodeTreeDbContext> options)
+            : base(options)
+        {
+            _options = options;
+        }
+
         private string _connectionString =
            "Server=localhost;Port=5432;Database=NodeTreeDb;User Id=postgres;Password=Postgress;";
 
@@ -36,7 +43,10 @@ namespace NodeTree.DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(_connectionString);
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseNpgsql(_connectionString);
+            }
         }
     }
 }
