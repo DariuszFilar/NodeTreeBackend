@@ -28,7 +28,7 @@ namespace NodeTree.API.Controllers
             Summary = "Adds a new node to the tree",    
             Description = "Adds a new node to the tree at the specified location, with the provided name"
             )]
-        public async Task<IActionResult> AddNode(CreateNodeRequest request)
+        public async Task<IActionResult> AddNodeAsync(CreateNodeRequest request)
         {
             var response = await _createNodeHandler.Handle(request);
             return Ok(response);
@@ -39,7 +39,7 @@ namespace NodeTree.API.Controllers
             Description = "Deletes a node with the specified ID from the tree."
             )]
         [HttpPost("node.delete")]
-        public async Task<IActionResult> DeleteNode(DeleteNodeRequest request)
+        public async Task<IActionResult> DeleteNodeAsync(DeleteNodeRequest request)
         {
             var response = await _deleteNodeHandler.Handle(request);
             return Ok(response);
@@ -50,7 +50,7 @@ namespace NodeTree.API.Controllers
            Description = "Rename a node with the specified ID from the tree."
            )]
         [HttpPost("node.rename")]
-        public async Task<IActionResult> UpdateNode(RenameNodeRequest request)
+        public async Task<IActionResult> UpdateNodeAsync(RenameNodeRequest request)
         {
             var response = await _renameNodeHandler.Handle(request);
             return Ok(response);

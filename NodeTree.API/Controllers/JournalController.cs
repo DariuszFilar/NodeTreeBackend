@@ -13,6 +13,7 @@ namespace NodeTree.API.Controllers
     {
         private readonly IRequestHandler<GetSingleExceptionLogRequest, GetSingleExceptionLogResponse> _getSingleExceptionLogHandler;
         private readonly IRequestWithSkipAndTakeHandler<GetRangeExceptionLogRequest, GetRangeExceptionLogResponse> _getRangeExceptionLogHandler;
+     
         public JournalController(IRequestHandler<GetSingleExceptionLogRequest, GetSingleExceptionLogResponse> getSingleExceptionLogHandler,
             IRequestWithSkipAndTakeHandler<GetRangeExceptionLogRequest, GetRangeExceptionLogResponse> getRangeExceptionLogHandler)
         {
@@ -22,21 +23,21 @@ namespace NodeTree.API.Controllers
 
         [HttpPost("getSingle")]
         [SwaggerOperation(
-            Summary = "Returns a range of events with the specified parameters information about a single exception log by ID.",
-            Description = "Returns a range of events with the specified parameters information about a single exception log specified by the ID provided in the request object."
+            Summary = "Returns the information about a single exception log by ID.",
+            Description = "Returns single exception log specified by the ID provided in the request object."
             )]
-        public async Task<IActionResult> GetSingleEvent(GetSingleExceptionLogRequest request)
+        public async Task<IActionResult> GetSingleEventAsync(GetSingleExceptionLogRequest request)
         {
             var response = await _getSingleExceptionLogHandler.Handle(request);
             return Ok(response);
         }
 
         [SwaggerOperation(
-           Summary = "Returns a range of events.",
-           Description = "Returns a range of events with the specified parameters."
+           Summary = "Returns a range of exceptions logs.",
+           Description = "Returns a range of exception logs with the specified parameters."
            )]
         [HttpPost("getRange")]
-        public async Task<IActionResult> GetRangeEvent([FromBody] GetRangeExceptionLogRequest request, [Required][FromQuery] int skip, [Required][FromQuery] int take)
+        public async Task<IActionResult> GetRangeEventAsync([FromBody] GetRangeExceptionLogRequest request, [Required][FromQuery] int skip, [Required][FromQuery] int take)
         {
             var response = await _getRangeExceptionLogHandler.Handle(request, skip, take);
             return Ok(response);

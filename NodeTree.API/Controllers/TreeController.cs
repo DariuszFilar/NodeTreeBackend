@@ -22,7 +22,7 @@ namespace NodeTree.API.Controllers
             Summary = "Returns entire tree.",
             Description = "Returns entire tree. If tree doesn't exist it will be created automatically."
             )]
-        public async Task<IActionResult> GetTree(GetTreeRequest request) 
+        public async Task<IActionResult> GetTreeAsync(GetTreeRequest request) 
         {
             var response = await _getTreeHandler.Handle(request);
             return Ok(response);
