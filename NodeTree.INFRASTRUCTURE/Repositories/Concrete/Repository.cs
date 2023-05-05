@@ -25,20 +25,20 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
 
         public virtual async Task AddAsync(TEntity entity)
         {
-            await _dbContext.Set<TEntity>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            _ = await _dbContext.Set<TEntity>().AddAsync(entity);
+            _ = await _dbContext.SaveChangesAsync();
         }
 
         public virtual async Task UpdateAsync(TEntity entity)
         {
-            _dbContext.Set<TEntity>().Update(entity);
-            await _dbContext.SaveChangesAsync();
+            _ = _dbContext.Set<TEntity>().Update(entity);
+            _ = await _dbContext.SaveChangesAsync();
         }
 
         public virtual async Task RemoveAsync(TEntity entity)
         {
-            _dbContext.Set<TEntity>().Remove(entity);
-            await _dbContext.SaveChangesAsync();
+            _ = _dbContext.Set<TEntity>().Remove(entity);
+            _ = await _dbContext.SaveChangesAsync();
         }
     }
 }

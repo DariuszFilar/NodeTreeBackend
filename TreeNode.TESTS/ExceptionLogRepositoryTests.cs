@@ -3,11 +3,6 @@ using NodeTree.DB;
 using NodeTree.DB.Entities;
 using NodeTree.INFRASTRUCTURE.DTOs;
 using NodeTree.INFRASTRUCTURE.Repositories.Concrete;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NodeTree.TESTS
 {
@@ -20,7 +15,7 @@ namespace NodeTree.TESTS
         [SetUp]
         public void Setup()
         {
-            var options = new DbContextOptionsBuilder<NodeTreeDbContext>()
+            DbContextOptions<NodeTreeDbContext> options = new DbContextOptionsBuilder<NodeTreeDbContext>()
                 .UseInMemoryDatabase(databaseName: "NodeTreeTestDb")
                 .Options;
 
@@ -49,16 +44,16 @@ namespace NodeTree.TESTS
                     StackTrace = "test"
                 }
             );
-            _context.SaveChangesAsync().GetAwaiter().GetResult();
+            _ = _context.SaveChangesAsync().GetAwaiter().GetResult();
 
             _repository = new ExceptionLogRepository(_context);
         }
-               
+
         [Test]
         public async Task GetExceptionLogAndCountFromDateToDateAndTakeAmout_ReturnsCorrectCountForSecureExeption()
         {
             // Act
-            var result = await _repository.GetExceptionLogAndCountFromDateToDateAndTakeAmout("SecureException",
+            ExceptionLogResult result = await _repository.GetExceptionLogAndCountFromDateToDateAndTakeAmout("SecureException",
                 DateTime.UtcNow.AddDays(-15),
                 DateTime.UtcNow,
                 0,
@@ -72,7 +67,7 @@ namespace NodeTree.TESTS
         public async Task GetExceptionLogAndCountFromDateToDateAndTakeAmout_ReturnsCorrectCountForSecureExeption_ReturnsCorrectCountForSecureExeption_WhenOneExceptionIsNotInDateRange()
         {
             // Act
-            var result = await _repository.GetExceptionLogAndCountFromDateToDateAndTakeAmout("SecureException",
+            ExceptionLogResult result = await _repository.GetExceptionLogAndCountFromDateToDateAndTakeAmout("SecureException",
                 DateTime.UtcNow.AddDays(-5),
                 DateTime.UtcNow,
                 0,
@@ -87,7 +82,7 @@ namespace NodeTree.TESTS
         {
             // Act
 
-            var result = await _repository.GetExceptionLogAndCountFromDateToDateAndTakeAmout("SecureException",
+            ExceptionLogResult result = await _repository.GetExceptionLogAndCountFromDateToDateAndTakeAmout("SecureException",
                 null,
                 null,
                 0,
@@ -102,7 +97,7 @@ namespace NodeTree.TESTS
         {
             // Act
 
-            var result = await _repository.GetExceptionLogAndCountFromDateToDateAndTakeAmout("SecureException",
+            ExceptionLogResult result = await _repository.GetExceptionLogAndCountFromDateToDateAndTakeAmout("SecureException",
                 null,
                 DateTime.UtcNow,
                 0,
@@ -117,7 +112,7 @@ namespace NodeTree.TESTS
         {
             // Act
 
-            var result = await _repository.GetExceptionLogAndCountFromDateToDateAndTakeAmout("SecureException",
+            ExceptionLogResult result = await _repository.GetExceptionLogAndCountFromDateToDateAndTakeAmout("SecureException",
                 DateTime.UtcNow.AddDays(-8),
                 null,
                 0,
@@ -130,7 +125,7 @@ namespace NodeTree.TESTS
         [TearDown]
         public void TearDown()
         {
-            _context.Database.EnsureDeletedAsync();
+            _ = _context.Database.EnsureDeletedAsync();
         }
 
     }

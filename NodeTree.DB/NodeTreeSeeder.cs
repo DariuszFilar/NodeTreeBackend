@@ -15,7 +15,7 @@ namespace NodeTree.DB
         {
             if (_context.Database.CanConnect())
             {
-                var pendingMigrations = _context.Database.GetPendingMigrations();
+                IEnumerable<string> pendingMigrations = _context.Database.GetPendingMigrations();
                 if (pendingMigrations != null && pendingMigrations.Any())
                 {
                     _context.Database.Migrate();
@@ -29,8 +29,8 @@ namespace NodeTree.DB
                         TreeName = "ExampleTree"
                     };
 
-                    _context.Nodes.Add(masterNode);
-                    _context.SaveChanges();
+                    _ = _context.Nodes.Add(masterNode);
+                    _ = _context.SaveChanges();
                 }
 
                 if (!_context.ExceptionsLog.Any())
@@ -56,11 +56,11 @@ namespace NodeTree.DB
                                 Value = "test"
                             }
                         },
-                         StackTrace = "test"
+                        StackTrace = "test"
                     };
 
-                    _context.ExceptionsLog.Add(exceptionLog);
-                    _context.SaveChanges();
+                    _ = _context.ExceptionsLog.Add(exceptionLog);
+                    _ = _context.SaveChanges();
                 }
             }
         }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
 
 namespace NodeTree.DB.Migrations
 {
@@ -8,7 +7,7 @@ namespace NodeTree.DB.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<long>(
+            _ = migrationBuilder.AlterColumn<long>(
                 name: "ParentId",
                 table: "Nodes",
                 type: "bigint",
@@ -19,7 +18,7 @@ namespace NodeTree.DB.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<long>(
+            _ = migrationBuilder.AlterColumn<long>(
                 name: "ParentId",
                 table: "Nodes",
                 type: "bigint",

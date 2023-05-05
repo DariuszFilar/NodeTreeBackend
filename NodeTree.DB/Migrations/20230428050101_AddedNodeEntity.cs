@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-#nullable disable
 
 namespace NodeTree.DB.Migrations
 {
@@ -9,7 +8,7 @@ namespace NodeTree.DB.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Nodes",
                 columns: table => new
                 {
@@ -20,13 +19,13 @@ namespace NodeTree.DB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Nodes", x => x.Id);
+                    _ = table.PrimaryKey("PK_Nodes", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Nodes");
         }
     }

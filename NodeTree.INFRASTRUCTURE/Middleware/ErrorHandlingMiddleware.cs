@@ -1,8 +1,8 @@
-﻿using NodeTree.INFRASTRUCTURE.Exceptions;
-using NodeTree.INFRASTRUCTURE.Services.Abstract;
+﻿using NodeTree.DB.Entities;
+using NodeTree.INFRASTRUCTURE.Exceptions;
 using NodeTree.INFRASTRUCTURE.Responses;
+using NodeTree.INFRASTRUCTURE.Services.Abstract;
 using System.Text.Json;
-using NodeTree.DB.Entities;
 
 namespace NodeTree.INFRASTRUCTURE.Middleware
 {
@@ -25,9 +25,9 @@ namespace NodeTree.INFRASTRUCTURE.Middleware
             }
             catch (SecureException secureException)
             {
-                context.Request.Body.Seek(0, SeekOrigin.Begin);
+                _ = context.Request.Body.Seek(0, SeekOrigin.Begin);
 
-                var requestBody = await JsonDocument.ParseAsync(context.Request.Body)
+                List<BodyParameter> requestBody = await JsonDocument.ParseAsync(context.Request.Body)
                     .ContinueWith(doc => doc.Result.RootElement.EnumerateObject())
                     .ContinueWith(objs => objs.Result.Select(item =>
                         new BodyParameter
@@ -37,7 +37,7 @@ namespace NodeTree.INFRASTRUCTURE.Middleware
                         }
                     ).ToList());
 
-                var queryParameters = context.Request.Query.Select(item =>
+                List<QueryParameter> queryParameters = context.Request.Query.Select(item =>
                     new QueryParameter
                     {
                         Key = item.Key,
@@ -45,13 +45,13 @@ namespace NodeTree.INFRASTRUCTURE.Middleware
                     }
                 ).ToList();
 
-                var exceptionLog = await _exceptionLogService.CreateExceptionLogAsync(secureException,
+                ExceptionLog exceptionLog = await _exceptionLogService.CreateExceptionLogAsync(secureException,
                     queryParameters,
                     requestBody);
 
                 context.Response.StatusCode = 500;
 
-                var response = new ExceptionMiddlewareResponse(exceptionLog);
+                ExceptionMiddlewareResponse response = new(exceptionLog);
 
                 await context.Response.WriteAsJsonAsync(response);
             }

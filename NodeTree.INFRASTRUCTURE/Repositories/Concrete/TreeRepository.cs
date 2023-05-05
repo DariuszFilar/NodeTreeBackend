@@ -30,9 +30,12 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
 
         private void LoadChildrenRecursively(Node node)
         {
-            if (node == null) return;
+            if (node == null)
+            {
+                return;
+            }
 
-            foreach (var child in node.Children)
+            foreach (Node child in node.Children)
             {
                 _context.Entry(child).Reference(n => n.Parent).Load();
                 _context.Entry(child).Collection(n => n.Children).Load();

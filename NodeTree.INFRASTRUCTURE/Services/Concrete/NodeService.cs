@@ -19,7 +19,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
         public async Task CreateNodeAsync(CreateNodeRequest request)
         {
             Node tree = await _treeRepository.GetTreeByTreeNameAsync(request.TreeName);
-            Node parent = await _nodeRepository.GetByIdAsync(request.ParentId);                      
+            Node parent = await _nodeRepository.GetByIdAsync(request.ParentId);
             if (tree == null)
             {
                 throw new SecureException($"Node with ID = {request.ParentId} was not found");

@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-#nullable disable
 
 namespace NodeTree.DB.Migrations
 {
@@ -10,20 +8,20 @@ namespace NodeTree.DB.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
+            _ = migrationBuilder.DropColumn(
                 name: "BodyParameters",
                 table: "ExceptionsLog");
 
-            migrationBuilder.DropColumn(
+            _ = migrationBuilder.DropColumn(
                 name: "QueryParameters",
                 table: "ExceptionsLog");
 
-            migrationBuilder.RenameColumn(
+            _ = migrationBuilder.RenameColumn(
                 name: "Id",
                 table: "ExceptionsLog",
                 newName: "ExceptionLogId");
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "BodyParameters",
                 columns: table => new
                 {
@@ -35,8 +33,8 @@ namespace NodeTree.DB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BodyParameters", x => x.Id);
-                    table.ForeignKey(
+                    _ = table.PrimaryKey("PK_BodyParameters", x => x.Id);
+                    _ = table.ForeignKey(
                         name: "FK_BodyParameters_ExceptionsLog_ExceptionLogId",
                         column: x => x.ExceptionLogId,
                         principalTable: "ExceptionsLog",
@@ -44,7 +42,7 @@ namespace NodeTree.DB.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "QueryParameters",
                 columns: table => new
                 {
@@ -56,8 +54,8 @@ namespace NodeTree.DB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QueryParameters", x => x.Id);
-                    table.ForeignKey(
+                    _ = table.PrimaryKey("PK_QueryParameters", x => x.Id);
+                    _ = table.ForeignKey(
                         name: "FK_QueryParameters_ExceptionsLog_ExceptionLogId",
                         column: x => x.ExceptionLogId,
                         principalTable: "ExceptionsLog",
@@ -65,12 +63,12 @@ namespace NodeTree.DB.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
+            _ = migrationBuilder.CreateIndex(
                 name: "IX_BodyParameters_ExceptionLogId",
                 table: "BodyParameters",
                 column: "ExceptionLogId");
 
-            migrationBuilder.CreateIndex(
+            _ = migrationBuilder.CreateIndex(
                 name: "IX_QueryParameters_ExceptionLogId",
                 table: "QueryParameters",
                 column: "ExceptionLogId");
@@ -78,24 +76,24 @@ namespace NodeTree.DB.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "BodyParameters");
 
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "QueryParameters");
 
-            migrationBuilder.RenameColumn(
+            _ = migrationBuilder.RenameColumn(
                 name: "ExceptionLogId",
                 table: "ExceptionsLog",
                 newName: "Id");
 
-            migrationBuilder.AddColumn<Dictionary<string, string>>(
+            _ = migrationBuilder.AddColumn<Dictionary<string, string>>(
                 name: "BodyParameters",
                 table: "ExceptionsLog",
                 type: "hstore",
                 nullable: true);
 
-            migrationBuilder.AddColumn<Dictionary<string, string>>(
+            _ = migrationBuilder.AddColumn<Dictionary<string, string>>(
                 name: "QueryParameters",
                 table: "ExceptionsLog",
                 type: "hstore",

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
 
 namespace NodeTree.DB.Migrations
 {
@@ -8,18 +7,18 @@ namespace NodeTree.DB.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<long>(
+            _ = migrationBuilder.AddColumn<long>(
                 name: "NodeId",
                 table: "Nodes",
                 type: "bigint",
                 nullable: true);
 
-            migrationBuilder.CreateIndex(
+            _ = migrationBuilder.CreateIndex(
                 name: "IX_Nodes_NodeId",
                 table: "Nodes",
                 column: "NodeId");
 
-            migrationBuilder.AddForeignKey(
+            _ = migrationBuilder.AddForeignKey(
                 name: "FK_Nodes_Nodes_NodeId",
                 table: "Nodes",
                 column: "NodeId",
@@ -29,15 +28,15 @@ namespace NodeTree.DB.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
+            _ = migrationBuilder.DropForeignKey(
                 name: "FK_Nodes_Nodes_NodeId",
                 table: "Nodes");
 
-            migrationBuilder.DropIndex(
+            _ = migrationBuilder.DropIndex(
                 name: "IX_Nodes_NodeId",
                 table: "Nodes");
 
-            migrationBuilder.DropColumn(
+            _ = migrationBuilder.DropColumn(
                 name: "NodeId",
                 table: "Nodes");
         }
