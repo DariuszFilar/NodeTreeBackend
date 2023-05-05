@@ -1,5 +1,4 @@
-﻿using NodeTree.DB.Entities;
-using NodeTree.INFRASTRUCTURE.DTOs;
+﻿using NodeTree.INFRASTRUCTURE.DTOs;
 using NodeTree.INFRASTRUCTURE.Requests;
 using NodeTree.INFRASTRUCTURE.Responses;
 using NodeTree.INFRASTRUCTURE.Services.Abstract;

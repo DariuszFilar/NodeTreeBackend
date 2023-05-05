@@ -9,7 +9,7 @@ namespace NodeTree.INFRASTRUCTURE
     {
         public void Apply(OpenApiParameter parameter, ParameterFilterContext context)
         {
-            var defaultValueAttribute = context.ParameterInfo.CustomAttributes
+            System.Reflection.CustomAttributeData defaultValueAttribute = context.ParameterInfo.CustomAttributes
                 .FirstOrDefault(attr => attr.AttributeType == typeof(DefaultValueAttribute));
 
             if (defaultValueAttribute != null)

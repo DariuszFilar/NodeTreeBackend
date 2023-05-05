@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NodeTree.DB.Entities;
 using NodeTree.DB;
+using NodeTree.DB.Entities;
 using NodeTree.INFRASTRUCTURE.Repositories.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NodeTree.TESTS
 {
@@ -18,7 +13,7 @@ namespace NodeTree.TESTS
         [SetUp]
         public void Setup()
         {
-            var options = new DbContextOptionsBuilder<NodeTreeDbContext>()
+            DbContextOptions<NodeTreeDbContext> options = new DbContextOptionsBuilder<NodeTreeDbContext>()
                 .UseInMemoryDatabase(databaseName: "NodeTreeTestDb")
                 .Options;
 
@@ -59,7 +54,7 @@ namespace NodeTree.TESTS
                 }
             );
 
-            _context.SaveChangesAsync().GetAwaiter().GetResult();
+            _ = _context.SaveChangesAsync().GetAwaiter().GetResult();
 
             _repository = new NodeRepository(_context);
         }
@@ -69,7 +64,7 @@ namespace NodeTree.TESTS
         {
             // Act
 
-            var result = await _repository.GetAllAsync();
+            IEnumerable<Node> result = await _repository.GetAllAsync();
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(4));
@@ -79,7 +74,8 @@ namespace NodeTree.TESTS
         public async Task GetAllSiblingsByParentIdAsync_ReturnsAllSiblingNodes()
         {
             // Arrange
-            Node node = new()
+            _ = new            // Arrange
+            Node()
             {
                 Name = "To be change",
                 TreeName = "Tree 1",
@@ -88,7 +84,7 @@ namespace NodeTree.TESTS
 
             // Act
 
-            var result = await _repository.GetAllSiblingsByParentIdAsync(2);
+            List<Node> result = await _repository.GetAllSiblingsByParentIdAsync(2);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(1));
@@ -97,7 +93,7 @@ namespace NodeTree.TESTS
         [TearDown]
         public void TearDown()
         {
-            _context.Database.EnsureDeletedAsync();
+            _ = _context.Database.EnsureDeletedAsync();
         }
 
     }

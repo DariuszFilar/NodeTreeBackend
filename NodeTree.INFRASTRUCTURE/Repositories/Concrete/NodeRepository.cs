@@ -18,6 +18,6 @@ namespace NodeTree.INFRASTRUCTURE.Repositories.Concrete
             return await _context.Nodes
                 .Where(n => n.ParentId == parentId)
                 .ToListAsync();
-        }            
+        }
     }
 }

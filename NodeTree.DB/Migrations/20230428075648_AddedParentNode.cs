@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-#nullable disable
 
 namespace NodeTree.DB.Migrations
 {
@@ -9,23 +8,23 @@ namespace NodeTree.DB.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
+            _ = migrationBuilder.DropForeignKey(
                 name: "FK_Nodes_Nodes_NodeId",
                 table: "Nodes");
 
-            migrationBuilder.DropPrimaryKey(
+            _ = migrationBuilder.DropPrimaryKey(
                 name: "PK_Nodes",
                 table: "Nodes");
 
-            migrationBuilder.DropIndex(
+            _ = migrationBuilder.DropIndex(
                 name: "IX_Nodes_NodeId",
                 table: "Nodes");
 
-            migrationBuilder.DropColumn(
+            _ = migrationBuilder.DropColumn(
                 name: "Id",
                 table: "Nodes");
 
-            migrationBuilder.AlterColumn<long>(
+            _ = migrationBuilder.AlterColumn<long>(
                 name: "NodeId",
                 table: "Nodes",
                 type: "bigint",
@@ -36,17 +35,17 @@ namespace NodeTree.DB.Migrations
                 oldNullable: true)
                 .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            migrationBuilder.AddPrimaryKey(
+            _ = migrationBuilder.AddPrimaryKey(
                 name: "PK_Nodes",
                 table: "Nodes",
                 column: "NodeId");
 
-            migrationBuilder.CreateIndex(
+            _ = migrationBuilder.CreateIndex(
                 name: "IX_Nodes_ParentId",
                 table: "Nodes",
                 column: "ParentId");
 
-            migrationBuilder.AddForeignKey(
+            _ = migrationBuilder.AddForeignKey(
                 name: "FK_Nodes_Nodes_ParentId",
                 table: "Nodes",
                 column: "ParentId",
@@ -56,19 +55,19 @@ namespace NodeTree.DB.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
+            _ = migrationBuilder.DropForeignKey(
                 name: "FK_Nodes_Nodes_ParentId",
                 table: "Nodes");
 
-            migrationBuilder.DropPrimaryKey(
+            _ = migrationBuilder.DropPrimaryKey(
                 name: "PK_Nodes",
                 table: "Nodes");
 
-            migrationBuilder.DropIndex(
+            _ = migrationBuilder.DropIndex(
                 name: "IX_Nodes_ParentId",
                 table: "Nodes");
 
-            migrationBuilder.AlterColumn<long>(
+            _ = migrationBuilder.AlterColumn<long>(
                 name: "NodeId",
                 table: "Nodes",
                 type: "bigint",
@@ -77,7 +76,7 @@ namespace NodeTree.DB.Migrations
                 oldType: "bigint")
                 .OldAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            migrationBuilder.AddColumn<long>(
+            _ = migrationBuilder.AddColumn<long>(
                 name: "Id",
                 table: "Nodes",
                 type: "bigint",
@@ -85,17 +84,17 @@ namespace NodeTree.DB.Migrations
                 defaultValue: 0L)
                 .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            migrationBuilder.AddPrimaryKey(
+            _ = migrationBuilder.AddPrimaryKey(
                 name: "PK_Nodes",
                 table: "Nodes",
                 column: "Id");
 
-            migrationBuilder.CreateIndex(
+            _ = migrationBuilder.CreateIndex(
                 name: "IX_Nodes_NodeId",
                 table: "Nodes",
                 column: "NodeId");
 
-            migrationBuilder.AddForeignKey(
+            _ = migrationBuilder.AddForeignKey(
                 name: "FK_Nodes_Nodes_NodeId",
                 table: "Nodes",
                 column: "NodeId",

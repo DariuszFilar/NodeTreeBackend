@@ -25,12 +25,12 @@ namespace NodeTree.API.Controllers
 
         [HttpPost("node.add")]
         [SwaggerOperation(
-            Summary = "Adds a new node to the tree",    
+            Summary = "Adds a new node to the tree",
             Description = "Adds a new node to the tree at the specified location, with the provided name"
             )]
         public async Task<IActionResult> AddNodeAsync(CreateNodeRequest request)
         {
-            var response = await _createNodeHandler.Handle(request);
+            CreateNodeResponse response = await _createNodeHandler.Handle(request);
             return Ok(response);
         }
 
@@ -41,7 +41,7 @@ namespace NodeTree.API.Controllers
         [HttpPost("node.delete")]
         public async Task<IActionResult> DeleteNodeAsync(DeleteNodeRequest request)
         {
-            var response = await _deleteNodeHandler.Handle(request);
+            DeleteNodeResponse response = await _deleteNodeHandler.Handle(request);
             return Ok(response);
         }
 
@@ -52,7 +52,7 @@ namespace NodeTree.API.Controllers
         [HttpPost("node.rename")]
         public async Task<IActionResult> UpdateNodeAsync(RenameNodeRequest request)
         {
-            var response = await _renameNodeHandler.Handle(request);
+            RenameNodeResponse response = await _renameNodeHandler.Handle(request);
             return Ok(response);
         }
     }

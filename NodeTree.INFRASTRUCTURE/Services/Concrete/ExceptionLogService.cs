@@ -17,11 +17,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
         public async Task<ExceptionLog> GetSingleExceptionAsync(GetSingleExceptionLogRequest request)
         {
             ExceptionLog exceptionLog = await _exceptionLogRepository.GetByIdAsync(request.EventId);
-            if (exceptionLog == null)
-            {
-                throw new SecureException("ExceptionLog not found");
-            }
-            return exceptionLog;
+            return exceptionLog ?? throw new SecureException("ExceptionLog not found");
         }
 
         public async Task<ExceptionLogResult> GetRangeExceptionAsync(GetRangeExceptionLogRequest request, int skip, int take)
@@ -36,7 +32,7 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
             List<QueryParameter> queryParameters,
             List<BodyParameter> bodyParameters) where T : Exception
         {
-            var exceptionLog = new ExceptionLog
+            ExceptionLog exceptionLog = new()
             {
                 Type = exception.GetType().Name,
                 CreatedAt = DateTime.UtcNow,
@@ -45,8 +41,8 @@ namespace NodeTree.INFRASTRUCTURE.Services.Concrete
                 StackTrace = exception.StackTrace,
                 Message = exception.Message
             };
-            
-            await _exceptionLogRepository.AddAsync(exceptionLog);            
+
+            await _exceptionLogRepository.AddAsync(exceptionLog);
             return exceptionLog;
         }
     }

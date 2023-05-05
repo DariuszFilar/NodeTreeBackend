@@ -12,7 +12,7 @@ using NodeTree.INFRASTRUCTURE.Responses;
 using NodeTree.INFRASTRUCTURE.Services.Abstract;
 using NodeTree.INFRASTRUCTURE.Services.Concrete;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSwaggerGen(c =>
@@ -61,10 +61,10 @@ builder.Services.AddScoped<IRequestHandler<RenameNodeRequest, RenameNodeResponse
 builder.Services.AddScoped<IRequestHandler<GetTreeRequest, GetTreeResponse>, GetTreeHandler>();
 builder.Services.AddScoped<IRequestHandler<GetSingleExceptionLogRequest, GetSingleExceptionLogResponse>, GetSingleExceptionLogHandler>();
 builder.Services.AddScoped<IRequestWithSkipAndTakeHandler<GetRangeExceptionLogRequest, GetRangeExceptionLogResponse>, GetRangeExceptionLogHandler>();
-var app = builder.Build();
+WebApplication app = builder.Build();
 
-var scope = app.Services.CreateScope();
-var seeder = scope.ServiceProvider.GetRequiredService<NodeTreeSeeder>();
+IServiceScope scope = app.Services.CreateScope();
+NodeTreeSeeder seeder = scope.ServiceProvider.GetRequiredService<NodeTreeSeeder>();
 
 seeder.Seed();
 

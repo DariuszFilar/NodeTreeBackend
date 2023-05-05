@@ -13,7 +13,7 @@ namespace NodeTree.API.Controllers
     {
         private readonly IRequestHandler<GetSingleExceptionLogRequest, GetSingleExceptionLogResponse> _getSingleExceptionLogHandler;
         private readonly IRequestWithSkipAndTakeHandler<GetRangeExceptionLogRequest, GetRangeExceptionLogResponse> _getRangeExceptionLogHandler;
-     
+
         public JournalController(IRequestHandler<GetSingleExceptionLogRequest, GetSingleExceptionLogResponse> getSingleExceptionLogHandler,
             IRequestWithSkipAndTakeHandler<GetRangeExceptionLogRequest, GetRangeExceptionLogResponse> getRangeExceptionLogHandler)
         {
@@ -28,7 +28,7 @@ namespace NodeTree.API.Controllers
             )]
         public async Task<IActionResult> GetSingleEventAsync(GetSingleExceptionLogRequest request)
         {
-            var response = await _getSingleExceptionLogHandler.Handle(request);
+            GetSingleExceptionLogResponse response = await _getSingleExceptionLogHandler.Handle(request);
             return Ok(response);
         }
 
@@ -39,7 +39,7 @@ namespace NodeTree.API.Controllers
         [HttpPost("getRange")]
         public async Task<IActionResult> GetRangeEventAsync([FromBody] GetRangeExceptionLogRequest request, [Required][FromQuery] int skip, [Required][FromQuery] int take)
         {
-            var response = await _getRangeExceptionLogHandler.Handle(request, skip, take);
+            GetRangeExceptionLogResponse response = await _getRangeExceptionLogHandler.Handle(request, skip, take);
             return Ok(response);
         }
     }

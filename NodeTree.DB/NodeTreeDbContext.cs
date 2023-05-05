@@ -12,7 +12,7 @@ namespace NodeTree.DB
             _options = options;
         }
 
-        private string _connectionString =
+        private readonly string _connectionString =
            "Server=localhost;Port=5432;Database=NodeTreeDb;User Id=postgres;Password=Postgress;";
 
         public DbSet<Node> Nodes { get; set; }
@@ -22,20 +22,20 @@ namespace NodeTree.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Node>()
+            _ = modelBuilder.Entity<Node>()
                 .Property(n => n.Name)
                 .IsRequired();
 
-            modelBuilder.Entity<Node>()
+            _ = modelBuilder.Entity<Node>()
                 .Property(n => n.TreeName)
                 .IsRequired();
 
-            modelBuilder.Entity<ExceptionLog>()
+            _ = modelBuilder.Entity<ExceptionLog>()
                 .HasMany(e => e.BodyParameters)
                 .WithOne(p => p.ExceptionLog)
                 .HasForeignKey(p => p.ExceptionLogId);
 
-            modelBuilder.Entity<ExceptionLog>()
+            _ = modelBuilder.Entity<ExceptionLog>()
                 .HasMany(e => e.QueryParameters)
                 .WithOne(p => p.ExceptionLog)
                 .HasForeignKey(p => p.ExceptionLogId);
@@ -45,7 +45,7 @@ namespace NodeTree.DB
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(_connectionString);
+                _ = optionsBuilder.UseNpgsql(_connectionString);
             }
         }
     }

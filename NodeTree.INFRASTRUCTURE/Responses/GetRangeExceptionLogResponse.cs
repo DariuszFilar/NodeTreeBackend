@@ -33,6 +33,6 @@ namespace NodeTree.INFRASTRUCTURE.Responses
                 Id = el.ExceptionLogId
             }).ToList();
         }
-    }    
+    }
 }
 

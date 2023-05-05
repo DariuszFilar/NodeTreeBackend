@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace NodeTree.DB.Entities
+﻿namespace NodeTree.DB.Entities
 {
     /// <summary>
     /// Represents a log entity for exceptions that occur in the system.
@@ -23,8 +21,8 @@ namespace NodeTree.DB.Entities
         /// The timestamp when the exception occurred.
         /// </summary>
         /// <param name="createdAt">The value of the timestamp.</param>
-        public DateTime CreatedAt { get; set; }              
-               
+        public DateTime CreatedAt { get; set; }
+
         /// <summary>
         /// The stack trace of the exception.
         /// </summary>
