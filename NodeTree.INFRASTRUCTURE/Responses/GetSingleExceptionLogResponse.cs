@@ -32,7 +32,7 @@ namespace NodeTree.INFRASTRUCTURE.Responses
             ExceptionLogId = exceptionLog.ExceptionLogId;
             Data = new Dictionary<string, string>
             {
-                { "text", exceptionLog.StackTrace }
+                { "message", exceptionLog.Message }
             };
             CreatedAt = exceptionLog.CreatedAt;
         }
